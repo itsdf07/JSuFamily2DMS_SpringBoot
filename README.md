@@ -57,7 +57,11 @@ C->     Project name:JSuFamily2DMS_SpringBoot
     解决方案：
         2.1、降低数据库版本，即在pom.xml中对应的mysql降低版本
         2.2、数据库的相关配置（driver-class-name），把com.mysql.jdbc.Driver替换成com.mysql.cj.jdbc.Driver
-    
+三、项目整合mybatis
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: com.aso.itsdf07.entity  # 注意：对应实体类的路径    
     
     
     
