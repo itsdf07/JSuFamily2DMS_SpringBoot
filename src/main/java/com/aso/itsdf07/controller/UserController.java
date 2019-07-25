@@ -43,27 +43,28 @@ public class UserController {
         String username = reqData.getUsername();
         String password = reqData.getPasswd();
         if (StringUtils.isEmpty(username)) {
-            modelAndView.setViewName("loginHtml");
+            modelAndView.setViewName("error");
             modelAndView.addObject("msg", "账号不能为空");
             return modelAndView;
         }
 
         if (StringUtils.isEmpty(password)) {
-            modelAndView.setViewName("loginHtml");
+            modelAndView.setViewName("error");
             modelAndView.addObject("msg", "密码不能为空");
             return modelAndView;
         }
 
         UserEntity user = userService.onUserLogin(username, password);
 
-        if (user != null) {
-            modelAndView.setViewName("mainHtml");
-            modelAndView.addObject("msg", "登陆成功");//登录成功
+        if (user == null) {
+            modelAndView.setViewName("error");
+            modelAndView.addObject("msg", "用户不存在");
 //            request.getSession().setAttribute("session_user", user);     //将用户信息放入session  用于后续的拦截器
             return modelAndView;
         }
-        modelAndView.setViewName("loginHtml");
-        modelAndView.addObject("msg", "登录失败，用户名或密码错误");
+        modelAndView.setViewName("mainHtml");
+        modelAndView.addObject("msg", "登陆成功");//登录成功
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 }

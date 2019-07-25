@@ -5,10 +5,8 @@
     <title>用户登录</title>
 </head>
 <body>
-<!--th:text="${msg}"-->
-<div th:text="${msg}"/>
 <div>
-    这是主页${name }
+    <p th:text="'账号：' + ${user.username} + '---密码：' + ${user.passwd}"/>
 </div>
 </body>
 </html>
