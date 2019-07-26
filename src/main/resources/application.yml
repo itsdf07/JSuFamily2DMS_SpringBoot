@@ -19,3 +19,8 @@ mybatis:
   type-aliases-package: com.aso.itsdf07.entity  # 注意：对应实体类的路径
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 配置控制台打印sql查询语句并附带查询结果数据
+
+logging:
+  level:
+#    root: info
+    com.aso.itsdf07.controller: debug  # 配置控制台打印指定目录下类的Logger等级
