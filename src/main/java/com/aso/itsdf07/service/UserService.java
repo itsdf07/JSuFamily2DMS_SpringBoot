@@ -5,6 +5,8 @@ import com.aso.itsdf07.mapper.UserEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Description: TODO
  * @Auther: itsdf07
@@ -27,5 +29,9 @@ public class UserService {
      */
     public UserEntity onUserLogin(String username, String passwd) {
         return userEntityMapper.userLogin(username, passwd);
+    }
+
+    public List<UserEntity> getAllUsers() {
+        return userEntityMapper.getAllUsers();
     }
 }
