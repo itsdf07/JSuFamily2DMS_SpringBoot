@@ -5,6 +5,8 @@ import com.aso.itsdf07.mapper.DemoEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Description: TODO
  * @Auther: itsdf07
@@ -28,5 +30,16 @@ public class DemoService {
     public DemoEntity getDemoEntity(String userName) {
         return demoEntityMapper.getDemoEntity(userName);
     }
+
+    /**
+     * 查询整张t_demo表的数据
+     *
+     * @return
+     */
+    public List<DemoEntity> getAllDemoEntity() {
+        return demoEntityMapper.getAllDemoEntity();
+    }
+
+
 
 }

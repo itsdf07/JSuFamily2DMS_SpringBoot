@@ -1,21 +1,29 @@
 package com.aso.itsdf07.mapper;
 
 import com.aso.itsdf07.entity.DemoEntity;
-import com.aso.itsdf07.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Mapper
 @Component
 public interface DemoEntityMapper {
     /**
-     * 根据d_进行查询username
+     * 根据d_username进行查询
      *
      * @param dUsername
      * @return
      */
     DemoEntity getDemoEntity(@Param("username") String dUsername);
+
+    /**
+     * 查询t_demo表所有数据
+     *
+     * @return
+     */
+    List<DemoEntity> getAllDemoEntity();
 
     //-----------------------------------------------------------------------
 

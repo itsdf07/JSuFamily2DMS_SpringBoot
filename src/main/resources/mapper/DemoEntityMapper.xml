@@ -21,7 +21,7 @@
         -->
         d_id, d_username, d_password, d_displayname, d_age, d_balance, d_create_time
     </sql>
-    
+
     <select id="getDemoEntity" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         *
@@ -33,6 +33,13 @@
         #{参数}:getDemoEntity(@Param("username") String dUsername)中@Param("username")里面的username，如果没有@Param("username")，则为dUsername
         -->
     </select>
+    <select id="getAllDemoEntity" resultMap="BaseResultMap">
+        select
+        *
+        from t_demo
+    </select>
+
+
     <!--===========================================================================================-->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         <!--

@@ -53,4 +53,22 @@ public class DemoController extends BaseController {
         return new Gson().toJson(responseDemoEntity);
     }
 
+    @RequestMapping(value = {"/getAllDemoEntity"})
+    @ResponseBody
+    public String getDemoEntitys() {
+        logger.info("getAllDemoEntitys");
+        List<DemoEntity> demoEntity = demoService.getAllDemoEntity();
+        ResponseDemoEntity responseDemoEntity = new ResponseDemoEntity();
+        if (demoEntity.isEmpty()) {
+            responseDemoEntity.setMessage("暂无数据");
+            responseDemoEntity.setCode(404);
+            return new Gson().toJson(responseDemoEntity);
+        }
+        responseDemoEntity.setMessage("请求成功");
+        responseDemoEntity.setCode(200);
+        responseDemoEntity.setData(demoEntity);
+        //返回json格式:{"data":[{"dId":1,"dUsername":"itsdf07","dPassword":"123456","dDisplayname":"叫我流氓","dAge":30,"dBalance":10.00,"dCreateTime":"Jul 27, 2019 11:17:29 AM"}],"message":"请求成功","code":200}
+        return new Gson().toJson(responseDemoEntity);
+    }
+
 }
