@@ -11,6 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = {"/redirect"})
 public class Redirect2HtmlController extends BaseController {
+    /**
+     * 跳转到用户登录页面:http://localhost:8080/redirect/demoHtml
+     *
+     * @return 登录页面
+     */
+    @RequestMapping(value = {"/demoHtml"})
+    public String demoHtml() {
+        return "demoHtml";
+    }
 
     /**
      * 跳转到用户登录页面:http://localhost:8080/redirect/loginHtml

@@ -23,19 +23,10 @@ public class DemoController extends BaseController {
     @Autowired
     private DemoService demoService;
 
-    /**
-     * 跳转到用户登录页面:http://localhost:8080/user/login
-     *
-     * @return 登录页面
-     */
-    @RequestMapping(value = {"/demoHtml"})
-    public String loginHtml() {
-        return "demoHtml";
-    }
-
     @RequestMapping(value = {"/getDemoEntity"})
     @ResponseBody
     public String getDemoEntity(String username, String data) {
+        //username:itsdf07,data:[{"name":"aso","age":30,"sex":"男"},{"name":"abin","age":30,"sex":"女"}]
         logger.info("username:" + username + ",data:" + data);
         DemoEntity demoEntity = demoService.getDemoEntity(username);
         List<DemoEntity> datas = new ArrayList<>();

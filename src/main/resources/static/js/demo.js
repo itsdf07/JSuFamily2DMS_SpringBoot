@@ -17,6 +17,7 @@ function getDemoEntityByUsername(username) {
     user2.sex = "女";
     data.push(user2);
     var json2Data = JSON.stringify(data);
+    //json2Data:[{"name":"aso","age":30,"sex":"男"},{"name":"abin","age":30,"sex":"女"}]
     console.log("json2Data:" + json2Data);
 
     $.ajax({
