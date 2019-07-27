@@ -18,7 +18,7 @@ function onLogin() {
         // async: false,
         success: function (data) {
             console.log("data-code:" + data.code + ",message:" + data.message);
-            if (data.code = 200) {
+            if (data.code == 200) {
                 window.location.href = "mainHtml";
             } else {
                 alert("登录失败," + data.message + "!");
