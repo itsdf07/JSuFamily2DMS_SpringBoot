@@ -47,9 +47,12 @@
     WHERE sku_id=#{skuId} AND datetime=#{datetime}
   </select>
 
-  <select id="updateGoodBySkuIdAndDataTime" parameterType="GoodEntity" >
+  <update id="updateGoodBySkuIdAndDataTime" parameterType="com.aso.itsdf07.entity.GoodEntity" >
     UPDATE  good
     SET
+    product_name=#{productName},
+    seller_sku=#{sellerSku},
+    url=#{url},
     sku_visitors=#{skuVisitors},
     sku_pageviews=#{skuPageviews},
     visitor_value=#{visitorValue},
@@ -65,7 +68,7 @@
     add_to_car_units=#{addToCarUnits},
     create_time=#{createTime}
     WHERE sku_id=#{skuId} AND datetime=#{datetime}
-  </select>
+  </update>
 
 
 

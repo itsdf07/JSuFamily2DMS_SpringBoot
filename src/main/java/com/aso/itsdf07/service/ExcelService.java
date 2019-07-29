@@ -61,7 +61,7 @@ public class ExcelService {
         String country = sheet.getRow(sheet.getLastRowNum() - 2).getCell(0).getStringCellValue();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        Date dateTime = sdf.parse(sheet.getRow(sheet.getLastRowNum()-1).getCell(0).getStringCellValue());
+        Date dateTime = sdf.parse(sheet.getRow(sheet.getLastRowNum() - 1).getCell(0).getStringCellValue());
         Date createTime = new Date();
 
         for (int r = 1; r <= sheet.getLastRowNum() - 4; r++) {
@@ -96,7 +96,7 @@ public class ExcelService {
             String revenue = row.getCell(10).getStringCellValue();
             //conversion_rate
             String conversion_rate = row.getCell(11).getStringCellValue();
-            conversion_rate = conversion_rate.substring(0,conversion_rate.length()-1);//需要去掉%
+            conversion_rate = conversion_rate.substring(0, conversion_rate.length() - 1);//需要去掉%
             //revenue_per_buyer
             String revenue_per_buyer = row.getCell(12).getStringCellValue();
             //wishlist_visitor
