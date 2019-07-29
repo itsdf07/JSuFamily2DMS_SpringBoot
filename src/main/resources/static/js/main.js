@@ -1,7 +1,3 @@
-$(function () {
-    alert("123456")
-    refurbishIndex();
-})
 
 function refurbishIndex() {
     var data = [];
