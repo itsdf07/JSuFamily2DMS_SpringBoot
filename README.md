@@ -64,5 +64,6 @@ mybatis:
   type-aliases-package: com.aso.itsdf07.entity  # 注意：对应实体类的路径    
     
     
-    
+    原符号       <        <=      >       >=       &        '        "
+    替换符号    &lt;    &lt;=   &gt;    &gt;=   &amp;   &apos;  &quot;
     

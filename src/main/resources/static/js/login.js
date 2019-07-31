@@ -6,6 +6,7 @@ function onLogin() {
     user.username = $("#username").val();
     user.passwd = $("#passwd").val();
     var user2Json = JSON.stringify(user);
+    //user2Login:{"username":"itsdf07","passwd":"123456"}
     console.log("user2Login:" + user2Json);
 
     $.ajax({

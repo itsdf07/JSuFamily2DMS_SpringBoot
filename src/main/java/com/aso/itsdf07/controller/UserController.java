@@ -93,6 +93,7 @@ public class UserController extends BaseController {
     /**
      * 用户登录
      *
+     * @param request2Json {"username":"itsdf07","passwd":"123456"}
      * @return
      */
     @RequestMapping(value = "/user2Login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")

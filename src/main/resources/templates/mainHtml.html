@@ -13,5 +13,38 @@
         <input type="submit" value="数据导入">
     </div>
 </form>
+<form action="/excel/exportGoods" method="post" enctype="multipart/form-data">
+    <div>
+        Product Name<input id="product_name" name="productName" type="text" placeholder="请输入Product Name"><br>
+        Seller SKU<input id="seller_sku" name="sellerSku" type="text" placeholder="请输入Seller SKU"><br>
+        SKU ID<input id="sku_id" type="text" name="skuId" placeholder="请输入SKU ID"><br>
+        URL<input id="url" type="text" name="url" placeholder="请输入URL"><br>
+        SKU Visitors<input id="sku_visitors" name="skuVisitors" type="number" value="-1"
+                           placeholder="请输入SKU Visitors"><br>
+        SKU Pageviews<input id="sku_pageviews" name="skuPageviews" type="number" value="-1"
+                            placeholder="请输入SKU Pageviews"><br>
+        Visitor Value<input id="visitor_value" name="visitorValue" type="number" value="-1"
+                            placeholder="请输入Visitor Value"><br>
+        Buyers<input id="buyers" type="text" name="buyers" value="-1" placeholder="请输入Buyers"><br>
+        Orders<input id="orders" type="number" name="orders" value="-1" placeholder="请输入Orders"><br>
+        Units Sold<input id="units_sold" name="unitsSold" type="number" value="-1" placeholder="请输入Units Sold"><br>
+        Revenue<input id="revenue" type="number" name="revenue" value="-1" placeholder="请输入Revenue"><br>
+        Conversion Rate<input id="conversion_rate" name="conversionRate" type="number" value="-1"
+                              placeholder="请输入Conversion Rate"><br>
+        Revenue per Buyer<input id="revenue_per_buyer" name="revenuePerBuyer" type="number" value="-1"
+                                placeholder="请输入Revenue per Buyer"><br>
+        Wishlist Visitor<input id="wishlist_visitor" name="wishlistVisitor" type="number" value="-1"
+                               placeholder="请输入Wishlist Visitor"><br>
+        Wishlists<input id="wishlists" type="number" name="wishlists" value="-1" placeholder="请输入Wishlists"><br>
+        Add to Cart Visitors<input id="add_to_car_visitors" name="addToCarVisitors" value="-1" type="number"
+                                   placeholder="请输入Add to Cart Visitors"><br>
+        Add to Cart Units<input id="add_to_car_units" name="addToCarUnits" value="-1" type="number"
+                                placeholder="请输入Add to Cart Units"><br>
+        店铺<input id="store" type="text" name="store" placeholder="请输入店铺"><br>
+        国家<input id="country" type="text" name="country" placeholder="请输入国家"><br><br><br>
+
+        <input type="submit" value="表格导出" >
+    </div>
+</form>
 </body>
 </html>
