@@ -76,43 +76,43 @@
         *
         FROM good
         <where>
-            <if test="skuVisitors != null or skuVisitors = 0 or skuVisitors gt 0">
+            <if test="skuVisitors != null and skuVisitors != -1">
                 AND sku_visitors &lt;= #{skuVisitors}
             </if>
-            <if test="skuPageviews != null or skuPageviews = 0 or  skuPageviews gt 0">
+            <if test="skuPageviews != null and skuPageviews != -1">
                 AND sku_pageviews &lt;= #{skuPageviews}
             </if>
-            <if test="visitorValue != null or visitorValue = 0 or visitorValue gt 0">
+            <if test="visitorValue != null and visitorValue != -1">
                 AND visitor_value &lt;= #{visitorValue}
             </if>
-            <if test="buyers != null or buyers = 0 or buyers gt 0">
+            <if test="buyers != null and buyers != -1">
                 AND buyers &lt;= #{buyers}
             </if>
-            <if test="orders != null or orders = 0 or orders gt 0">
+            <if test="orders != null and orders != -1">
                 AND orders &lt;= #{orders}
             </if>
-            <if test="unitsSold != null or unitsSold = 0 or unitsSold gt 0">
+            <if test="unitsSold != null and unitsSold != -1">
                 AND units_sold &lt;= #{unitsSold}
             </if>
-            <if test="revenue != null or revenue = 0 or revenue gt 0">
+            <if test="revenue != null and revenue != -1">
                 AND revenue &lt;= #{revenue}
             </if>
-            <if test="conversionRate != null or conversionRate = 0 or conversionRate gt 0">
+            <if test="conversionRate != null and conversionRate != -1">
                 AND conversion_rate &lt;= #{conversionRate}
             </if>
-            <if test="revenuePerBuyer != null or revenuePerBuyer = 0 or revenuePerBuyer gt 0">
+            <if test="revenuePerBuyer != null and revenuePerBuyer != -1">
                 AND revenue_per_buyer &lt;= #{revenuePerBuyer}
             </if>
-            <if test="wishlistVisitor != null or wishlistVisitor = 0 or wishlistVisitor gt 0">
+            <if test="wishlistVisitor != null and wishlistVisitor != -1">
                 AND wishlist_visitor &lt;= #{wishlistVisitor}
             </if>
-            <if test="wishlists != null or wishlists = 0 or wishlists gt 0">
+            <if test="wishlists != null and wishlists != -1">
                 AND wishlists &lt;= #{wishlists}
             </if>
-            <if test="addToCarVisitors != null or addToCarVisitors = 0 or addToCarVisitors gt 0">
+            <if test="addToCarVisitors != null and addToCarVisitors != -1">
                 AND add_to_car_visitors &lt;= #{addToCarVisitors}
             </if>
-            <if test="addToCarUnits != null or addToCarUnits = 0 or addToCarUnits gt 0">
+            <if test="addToCarUnits != null and addToCarUnits != -1">
                 AND add_to_car_units &lt;= #{addToCarUnits}
             </if>
             <if test="store != null and store != 0">
