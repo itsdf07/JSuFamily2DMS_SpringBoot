@@ -4,10 +4,8 @@ import com.aso.itsdf07.entity.GoodEntity;
 import com.aso.itsdf07.mapper.GoodEntityMapper;
 import com.aso.itsdf07.utils.ExcelUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,14 +58,16 @@ public class ExcelService {
             notNull = true;
         }
         GoodEntity goodEntity;
-        String store = sheet.getRow(sheet.getLastRowNum() - 3).getCell(0).getStringCellValue();
-        String country = sheet.getRow(sheet.getLastRowNum() - 2).getCell(0).getStringCellValue();
+        String store = sheet.getRow(sheet.getLastRowNum() - 2).getCell(0).getStringCellValue();
+        String country = sheet.getRow(sheet.getLastRowNum() - 1).getCell(0).getStringCellValue();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        Date dateTime = sdf.parse(sheet.getRow(sheet.getLastRowNum() - 1).getCell(0).getStringCellValue());
+        Cell cell = sheet.getRow(sheet.getLastRowNum()).getCell(0);
+        cell.setCellType(CellType.STRING);
+        Date dateTime = sdf.parse(cell.getStringCellValue());
         Date createTime = new Date();
 
-        for (int r = 1; r <= sheet.getLastRowNum() - 4; r++) {
+        for (int r = 1; r <= sheet.getLastRowNum() - 3; r++) {
             Row row = sheet.getRow(r);
             if (row == null) {
                 continue;
