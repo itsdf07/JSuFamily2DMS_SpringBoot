@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>主页</title>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/main.js"></script>
 </head>
 <body>
-<form action="/excel/importGoods" method="post" enctype="multipart/form-data">
+<form action="../excel/importGoods" method="post" enctype="multipart/form-data">
     <div>
         <input name="file" type="file" value="请选择您要导入的文档">
         <input type="submit" value="数据导入">
     </div>
 </form>
-<form action="/excel/exportGoods" method="post" enctype="multipart/form-data">
+<form action="../excel/exportGoods" method="post" enctype="multipart/form-data">
     <div>
         Product Name<input id="product_name" name="productName" type="text" placeholder="请输入Product Name"><br>
         Seller SKU<input id="seller_sku" name="sellerSku" type="text" placeholder="请输入Seller SKU"><br>

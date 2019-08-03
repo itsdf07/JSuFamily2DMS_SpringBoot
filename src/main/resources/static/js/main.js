@@ -24,7 +24,7 @@ function onExportExcel() {
     console.log("json_str:" + json_str);
     $.ajax({
         type: "post",
-        url: "/excel/exportGoods",
+        url: "../excel/exportGoods",
         dataType: "json",
         data: {
             data: json_str

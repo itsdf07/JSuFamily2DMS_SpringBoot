@@ -11,7 +11,7 @@ function onLogin() {
 
     $.ajax({
         type: "post",
-        url: "/user/user2Login",
+        url: "../user/user2Login",
         dataType: "json",
         data: {
             data:user2Json

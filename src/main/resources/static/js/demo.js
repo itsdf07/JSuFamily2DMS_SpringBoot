@@ -22,7 +22,7 @@ function getDemoEntityByUsername(username) {
 
     $.ajax({
         type: "post",
-        url: "/demo/getDemoEntity",
+        url: "../demo/getDemoEntity",
         dataType: "json",
         data: {
             username: "itsdf07",

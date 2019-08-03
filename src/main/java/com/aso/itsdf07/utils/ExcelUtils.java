@@ -59,7 +59,7 @@ public class ExcelUtils {
 
         //准备将Excel的输出流通过response输出到页面下载
         //八进制输出流
-        response.setContentType("application/octet-stream;charset=utf-8");
+        response.setContentType("multipart/form-data");
 
         //设置导出Excel的名称
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xls");
