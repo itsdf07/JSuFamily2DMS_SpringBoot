@@ -3,7 +3,8 @@ package com.aso.itsdf07.utils;
 import org.apache.poi.hssf.usermodel.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,4 +74,67 @@ public class ExcelUtils {
         //关闭workbook
         workbook.close();
     }
+
+    /**
+     * 描述：导出
+     *
+     * @param file     csv文件(路径+文件名)，csv文件不存在会自动创建
+     * @param dataList 数据（data1,data2,data3...）
+     * @return
+     * @author mao2080@sina.com
+     * @created 2017年8月26日 下午2:39:13
+     * @since
+     */
+//    public static boolean exportCsv(File file, List<String> dataList) {
+//        FileOutputStream out = null;
+//        OutputStreamWriter osw = null;
+//        BufferedWriter bfw = null;
+//        try {
+//            out = new FileOutputStream(file);
+//            osw = new OutputStreamWriter(out, "gbk");
+//            bfw = new BufferedWriter(osw);
+//            if (dataList != null && !dataList.isEmpty()) {
+//                for (String data : dataList) {
+//                    bfw.append(data).append("\r");
+//                }
+//            }
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        } finally {
+//            IOUtil.closeQuietly(bfw, osw, out);
+//        }
+//    }
+
+    /**
+     * 描述：导入
+     *
+     * @param file csv文件(路径+文件名)
+     * @return
+     * @author mao2080@sina.com
+     * @created 2017年8月26日 下午2:42:08
+     * @since
+     */
+    public static List<String> importCsv(File file) {
+        List<String> dataList = new ArrayList<String>();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(file));
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                dataList.add(line);
+            }
+        } catch (Exception e) {
+
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return dataList;
+    }
+
+
 }

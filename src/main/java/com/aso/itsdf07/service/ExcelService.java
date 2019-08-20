@@ -1,7 +1,9 @@
 package com.aso.itsdf07.service;
 
 import com.aso.itsdf07.entity.GoodEntity;
+import com.aso.itsdf07.entity.TransactionEntity;
 import com.aso.itsdf07.mapper.GoodEntityMapper;
+import com.aso.itsdf07.mapper.TransactionEntityMapper;
 import com.aso.itsdf07.utils.ExcelUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +31,8 @@ import java.util.List;
 public class ExcelService {
     @Autowired
     private GoodEntityMapper goodEntityMapper;
+    @Autowired
+    private TransactionEntityMapper transactionEntityMapper;
     /**
      * 数据新增的模板行数
      */
@@ -214,5 +219,103 @@ public class ExcelService {
             excelData.add(data2Row);
         }
         ExcelUtils.exportExcel(response, excelData, "无效数据", "InvalidDatas", 15);
+    }
+
+
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public boolean batchImportTransaction(String fileName, MultipartFile file) throws Exception {
+
+        boolean notNull = false;
+        List<TransactionEntity> transactionList = new ArrayList<TransactionEntity>();
+        if (!fileName.matches("^.+\\.(?i)(xls)$") && !fileName.matches("^.+\\.(?i)(xlsx)$")) {
+            //TODO 上传文件格式不正确
+            return false;
+        }
+        boolean isExcel2003 = true;
+        if (fileName.matches("^.+\\.(?i)(xlsx)$")) {
+            isExcel2003 = false;
+        }
+        InputStream is = file.getInputStream();
+        Workbook wb = null;
+        if (isExcel2003) {
+            wb = new HSSFWorkbook(is);
+        } else {
+            wb = new XSSFWorkbook(is);
+        }
+        Sheet sheet = wb.getSheetAt(0);
+        if (sheet != null) {
+            notNull = true;
+        }
+        TransactionEntity transactionEntity;
+
+        Date createTime = new Date();
+
+        for (int r = 1; r <= sheet.getLastRowNum(); r++) {
+            Row row = sheet.getRow(r);
+            if (row == null) {
+                continue;
+            }
+
+            transactionEntity = new TransactionEntity();
+
+            Date transaction_date = row.getCell(0) == null ? null : row.getCell(0).getDateCellValue();
+            String transaction_type = row.getCell(1) == null ? "" : row.getCell(1).getStringCellValue();
+            String fee_name = row.getCell(2) == null ? "" : row.getCell(2).getStringCellValue();
+            String transaction_number = row.getCell(3) == null ? "" : row.getCell(3).getStringCellValue();
+            String details = row.getCell(4) == null ? "" : row.getCell(4).getStringCellValue();
+            String seller_sku = row.getCell(5) == null ? "" : row.getCell(5).getStringCellValue();
+            String lazada_sku = row.getCell(6) == null ? "" : row.getCell(6).getStringCellValue();
+            double amount = row.getCell(7) == null ? 0 : row.getCell(7).getNumericCellValue();
+            double vat_in_amount = row.getCell(8) == null ? 0 : row.getCell(8).getNumericCellValue();
+            double wht_amount = row.getCell(9) == null ? 0 : row.getCell(9).getNumericCellValue();
+            String wht_included_in_amount = row.getCell(10) == null ? "" : row.getCell(10).getStringCellValue();
+            String statement = row.getCell(11) == null ? "" : row.getCell(11).getStringCellValue();
+            String paid_status = row.getCell(12) == null ? "" : row.getCell(12).getStringCellValue();
+            String order_no = new BigDecimal(row.getCell(13) == null ? 0 : row.getCell(13).getNumericCellValue()).toString();
+            System.out.println("order_no:" + order_no);
+            String order_item_no = new BigDecimal(row.getCell(14) == null ? 0 : row.getCell(14).getNumericCellValue()).toString();
+            String order_item_status = row.getCell(15) == null ? "" : row.getCell(15).getStringCellValue();
+            String shipping_provider = row.getCell(16) == null ? "" : row.getCell(16).getStringCellValue();
+            String shipping_speed = row.getCell(17) == null ? "" : row.getCell(17).getStringCellValue();
+            String shipment_type = row.getCell(18) == null ? "" : row.getCell(18).getStringCellValue();
+            String reference = new BigDecimal(row.getCell(19) == null ? 0 : row.getCell(19).getNumericCellValue()).toString();
+            String comment = row.getCell(20) == null ? "" : row.getCell(20).getStringCellValue();
+            String paymenttrfid = row.getCell(21) == null ? "" : row.getCell(21).getStringCellValue();
+
+            transactionEntity.setTransactionDate(transaction_date);
+            transactionEntity.setTransactionType(transaction_type);
+            transactionEntity.setFeeName(fee_name);
+            transactionEntity.setTransactionNumber(transaction_number);
+            transactionEntity.setDetails(details);
+            transactionEntity.setSellerSku(seller_sku);
+            transactionEntity.setLazadaSku(lazada_sku);
+            transactionEntity.setAmount(amount);
+            transactionEntity.setVatInAmount(vat_in_amount);
+            transactionEntity.setWhtAmount(wht_amount);
+            transactionEntity.setWhtIncludedInAmount(wht_included_in_amount);
+            transactionEntity.setStatement(statement);
+            transactionEntity.setPaidStatus(paid_status);
+            transactionEntity.setOrderNo(order_no);
+            transactionEntity.setOrderItemNo(order_item_no);
+            transactionEntity.setOrderItemStatus(order_item_status);
+            transactionEntity.setShippingProvider(shipping_provider);
+            transactionEntity.setShippingSpeed(shipping_speed);
+            transactionEntity.setShipmentType(shipment_type);
+            transactionEntity.setReference(reference);
+            transactionEntity.setComment(comment);
+            transactionEntity.setPaymentrefid(paymenttrfid);
+            transactionEntity.setCreateTime(createTime);
+            transactionList.add(transactionEntity);
+        }
+        for (TransactionEntity entity : transactionList) {
+            int cnt = transactionEntityMapper.findTransactionByOrderNoAndDataTime(entity);
+            System.out.println("orderNo:" + entity.getOrderNo() + "," + cnt);
+            if (cnt == 0) {
+                transactionEntityMapper.insert(entity);
+            } else {
+                transactionEntityMapper.updateTransactionByOrderNoAndDataTime(entity);
+            }
+        }
+        return notNull;
     }
 }

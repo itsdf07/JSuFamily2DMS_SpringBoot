@@ -1,9 +1,7 @@
 package com.aso.itsdf07.controller;
 
-import com.aso.itsdf07.bean.RequestUserLoginEntity;
 import com.aso.itsdf07.entity.GoodEntity;
 import com.aso.itsdf07.service.ExcelService;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,41 +41,6 @@ public class ExcelController {
         return isSuccess;
     }
 
-//    /**
-//     * Excel 文件数据导入
-//     *
-//     * @param response
-//     * @param filter2Json 过滤条件
-//     * @return
-//     */
-//    @PostMapping("/exportGoods")
-//    public void exportGoods(HttpServletResponse response, @RequestParam(value = "data") String filter2Json) throws IOException {
-//        GoodEntity filterGoodEntity = new Gson().fromJson(filter2Json, GoodEntity.class);
-//        String[] header = {"Product Name",
-//                "Seller SKU",
-//                "SKU ID",
-//                "URL",
-//                "SKU Visitors",
-//                "SKU Pageviews",
-//                "Visitor Value",
-//                "Buyers",
-//                "Orders",
-//                "Units Sold",
-//                "Revenue",
-//                "Conversion Rate",
-//                "Revenue per Buyer",
-//                "Wishlist Visitor",
-//                "Wishlists",
-//                "Add to Cart Visitors",
-//                "Add to Cart Units",
-//                "店铺",
-//                "国家",
-//                "数据日期",
-//                "导入日期"};
-//        excelService.batchExport(response, filterGoodEntity, header);
-//    }
-
-
     /**
      * Excel 文件数据导入
      *
@@ -109,6 +72,25 @@ public class ExcelController {
                 "数据日期",
                 "导入日期"};
         excelService.batchExport(response, filterGoodEntity, header);
+    }
+
+
+    /**
+     * Excel 文件数据导入：Transaction
+     *
+     * @param file
+     * @return
+     */
+    @PostMapping("/importTransaction")
+    public boolean importTransaction(@RequestParam("file") MultipartFile file) {
+        boolean isSuccess = false;
+        String fileName = file.getOriginalFilename();
+        try {
+            isSuccess = excelService.batchImportTransaction(fileName, file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isSuccess;
     }
 
 }
